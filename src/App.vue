@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    {{ contenido }}
+    <div>
+      <input type="text" v-model="nuevoLenguaje" @keyup.enter="agregarLenguaje" />
+      <input type="text" v-model="nuevoLink" @keyup.enter="agregarLenguaje" />
+      <button @click="agregarLenguaje">Agregar lenguaje</button>
+    </div>
+    <ul>
+      <li v-for="lenguaje of lenguajes" :key="lenguaje.nombre">
+        <a :href="lenguaje.link" target="_blank">{{ lenguaje.nombre }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data: function () {
+    return {
+      contenido: "Hola mundo desde programador novato",
+      lenguajes: [
+        { nombre: "JavaScript", link: 'https://www.javascript.com', puntos: 0 },
+        { nombre: "PHP", link: 'https://php.net', puntos: 0 },
+        { nombre: "Python", link: 'https://www.python.org', puntos: 10 }
+      ],
+      nuevoLenguaje: '',
+      nuevoLink: '',
+    };
+  },
+  methods: {
+    agregarLenguaje() {
+      this.lenguajes.push({ nombre: this.nuevoLenguaje, link: this.nuevoLink })
+      this.nuevoLenguaje = '';
+      this.nuevoLink = '';
+    }
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
