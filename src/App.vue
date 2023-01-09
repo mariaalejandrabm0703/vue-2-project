@@ -49,6 +49,20 @@
         quia maxime minima, saepe eveniet autem aut? Earum non quisquam ex repellendus hic nesciunt.
       </div>
     </div>
+    <div id="elemento" class="container mt-5">
+      <h3>{{ texto }}</h3>
+      <h3>{{ alReves }}</h3>
+      <input type="text" v-model="texto">
+      <hr>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+          :style="{ width: contador + '%' }" :class="tipoBarra">
+          {{ contador }}
+        </div>
+      </div>
+      <button @click="contador++" class="btn btn-primary">+</button>
+      <button @click="contador--" class="btn btn-danger">-</button>
+    </div>
   </div>
 </template>
 
@@ -68,7 +82,9 @@ export default {
     nuevoLenguaje: '',
     nuevoLink: '',
     colorFondo: 'bg-primary',
-    cambioColor: false
+    cambioColor: false,
+    texto: 'programador novato',
+    contador: 0
   }),
   methods: {
     reverseMessage: function () {
@@ -93,7 +109,17 @@ export default {
       return [
         this.cambioColor ? 'text-primary' : 'text-warning'
       ]
-    }
+    },
+    alReves() {
+      return this.texto.split('').reverse().join('');
+    },
+    tipoBarra() {
+      return {
+        'bg-success': this.contador <= 10,
+        'bg-warning': this.contador > 10 && this.contador <= 20,
+        'bg-danger': this.contador > 20
+      }
+    },
   }
 }
 </script>
