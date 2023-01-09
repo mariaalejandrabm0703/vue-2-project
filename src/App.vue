@@ -27,6 +27,27 @@
         </li>
       </ul>
       Suma de todos los votos {{ sumarTodo }}
+      <br>
+      <br>
+      <br>
+    </div>
+    <div id="elemento" class="container mt-3">
+      <div v-bind:class="['p-2', 'text-white', colorFondo]">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum non doloribus iste veniam voluptatibus, sequi id
+        quia maxime minima, saepe eveniet autem aut? Earum non quisquam ex repellendus hic nesciunt.
+      </div>
+      <input type="text" v-model="colorFondo">
+      <br>
+      <br>
+      <div class="p-2 text-white" :class="{ 'bg-danger': cambioColor, 'bg-primary': !cambioColor }">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum non doloribus iste veniam voluptatibus, sequi id
+        quia maxime minima, saepe eveniet autem aut? Earum non quisquam ex repellendus hic nesciunt.
+      </div>
+      <button class="btn btn-primary" @click="cambioColor = !cambioColor">Cambia color</button>
+      <div v-bind:class="classArray">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum non doloribus iste veniam voluptatibus, sequi id
+        quia maxime minima, saepe eveniet autem aut? Earum non quisquam ex repellendus hic nesciunt.
+      </div>
     </div>
   </div>
 </template>
@@ -45,7 +66,9 @@ export default {
       { nombre: "Python", link: 'https://www.python.org', puntos: 0 }
     ],
     nuevoLenguaje: '',
-    nuevoLink: ''
+    nuevoLink: '',
+    colorFondo: 'bg-primary',
+    cambioColor: false
   }),
   methods: {
     reverseMessage: function () {
@@ -65,6 +88,11 @@ export default {
       })
 
       return total;
+    },
+    classArray: function () {
+      return [
+        this.cambioColor ? 'text-primary' : 'text-warning'
+      ]
     }
   }
 }
