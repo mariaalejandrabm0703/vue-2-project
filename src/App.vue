@@ -70,6 +70,7 @@
 
 export default {
   name: 'App',
+  components: {},
   data: () => ({
     contenido: "Hola mundo desde programador novato",
     seen: true,
