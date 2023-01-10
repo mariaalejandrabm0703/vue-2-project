@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vuejs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="elemento" class="container p-5 pb-0 bg-light text-dark">
+      <h1 class="text-center">Listado de tareas</h1>
+        <createtodo></createtodo>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // PADRE
+      Vue.component('createtodo',{
+          template: //html
+          `
+            <div class=' pt-4 pb-0 bg-light text-dark' >
+                <h4>Crear nueva tarea</h4>
+                <input type="text" class='mt-4 form-control' v-model="message" placeholder="Nombre de la tarea">
+                <button v-on:click="saveTodo" class="btn btn-primary mt-3">Guardar</button>
+                <showtodolist :todoList=todoList></showtodolist>
+            </div>
+          `,
+          data(){
+              return{
+                todoList: [' - '],
+                message: ''
+              }
+          },
+          methods: {
+            saveTodo: function () {
+              if(this.todoList.includes(' - ')){
+                this.todoList.shift();
+
+              }
+              this.todoList.push(this.message);
+              this.message = '';
+            }
+          },
+      });
+
+      Vue.component('showtodolist',{
+          template: //html
+          `
+            <div class='mt-4'>
+              <h4>Tareas</h4>
+              <ul>
+                <li v-for="(todo, index) of todoList" :key="index">
+                  {{todo}}
+                </li>
+              </ul>
+            </div>
+          `,
+          props:['todoList'],
+
+      });
+
+    const con=new Vue({
+      el:"#elemento",
+      data:{}
+    });
+  </script>
+</html>
