@@ -26,16 +26,12 @@
           `,
           data(){
               return{
-                todoList: [' - '],
+                todoList: [],
                 message: ''
               }
           },
           methods: {
             saveTodo: function () {
-              if(this.todoList.includes(' - ')){
-                this.todoList.shift();
-
-              }
               this.todoList.push(this.message);
               this.message = '';
             }
@@ -47,6 +43,7 @@
           `
             <div class='mt-4'>
               <h4>Tareas</h4>
+              <span v-if="todoList.length === 0">No hay tareas registradas.</span>
               <ul>
                 <li v-for="(todo, index) of todoList" :key="index">
                   {{todo}}
